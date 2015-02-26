@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 import android.content.Intent;
 import android.provider.MediaStore;
 
-public class MainActivity extends ActionBarActivity {
+public class TakePicture extends ActionBarActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView takenPictureView;
