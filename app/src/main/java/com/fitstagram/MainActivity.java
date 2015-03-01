@@ -12,15 +12,14 @@ import android.provider.MediaStore;
 public class MainActivity extends ActionBarActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    ImageView takenPictureView;
+    ImageView pictureView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_take_picture);
+        setContentView(R.layout.activity_main);
 
-        Button takePictureButton = (Button) findViewById(R.id.takePictureButton);
-        takenPictureView = (ImageView) findViewById(R.id.takenPictureView);
+        pictureView = (ImageView) findViewById(R.id.picture_view);
     }
 
     public void launchCamera(View view){
@@ -37,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
             //get the photo
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
-            takenPictureView.setImageBitmap(photo);
+            pictureView.setImageBitmap(photo);
         }
     }
 }
