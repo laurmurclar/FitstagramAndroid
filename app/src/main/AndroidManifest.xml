@@ -44,6 +44,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fitstagram.MainActivity" />
         </activity>
+        <activity
+            android:name=".ViewThreadActivity"
+            android:label="@string/title_activity_view_thread" >
+        </activity>
     </application>
 
 </manifest>

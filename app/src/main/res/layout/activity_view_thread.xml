@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fitstagram.ViewThreadActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:paddingTop="20dp"
+        android:src="@drawable/sample1"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:text="Tags here eg #this #is #a #sample #activity"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingLeft="30dp"
+        android:text=">Laura31: This is a sample comment"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingLeft="30dp"
+        android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+
+</LinearLayout>

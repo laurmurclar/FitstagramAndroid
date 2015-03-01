@@ -1,33 +1,27 @@
+/*
+* IMPORTANT: You will have to pass this activity the thread data such as photo and comments
+ */
 package com.fitstagram;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 
-public class UploadConfirmActivity extends ActionBarActivity {
+public class ViewThreadActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_confirm);
-        ImageView mImageView = (ImageView) findViewById(R.id.img_to_confirm);
-        //get the image from the intent
-        Intent intent = getIntent();
-        Bitmap bitmap = intent.getParcelableExtra("BitmapImg");
-        mImageView.setImageBitmap(bitmap);
+        setContentView(R.layout.activity_view_thread);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_upload_confirm, menu);
+        getMenuInflater().inflate(R.menu.menu_view_thread, menu);
         return true;
     }
 
@@ -44,14 +38,5 @@ public class UploadConfirmActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void upload(View view){
-        Intent intent = new Intent(this, ViewThreadActivity.class);
-        startActivity(intent);
-    }
-
-    public void dontUpload(View view){
-       finish();
     }
 }

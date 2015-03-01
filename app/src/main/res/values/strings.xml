@@ -12,5 +12,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="confirm_upload">Upload this photo?</string>
+    <string name="title_activity_view_thread">ViewThreadActivity</string>
 
 </resources>
