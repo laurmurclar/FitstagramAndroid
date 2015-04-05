@@ -3,31 +3,122 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.fitstagram.ViewThreadActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <ImageView
         android:paddingTop="20dp"
         android:src="@drawable/sample1"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="376dp"
+        android:layout_height="245dp"
         android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="15dp"
-        android:text="Tags here eg #this #is #a #sample #activity"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:paddingLeft="30dp"
-        android:text=">Laura31: This is a sample comment"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingLeft="30dp"
-        android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
 
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/ratingBar"
+        android:numStars="5"
+        android:stepSize="1.0" />
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:paddingTop="10dp"
+     android:paddingLeft="15dp"
+     android:text="Tags here eg #this #is #a #sample #activity"/>
+    <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:paddingTop="10dp"
+     android:paddingLeft="15dp"
+     android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+     <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:paddingTop="10dp"
+     android:paddingLeft="15dp"
+     android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">Laura31: Wow scrollable comment section, how exciting."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:text=">HarryIzCul: Wow I love exercise. Wow cool arms. Wow sand. I wish I could do pushups. Wow. "/>
+
+    </LinearLayout>
+
+</ScrollView>
 </LinearLayout>

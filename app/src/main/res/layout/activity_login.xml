@@ -65,6 +65,10 @@
             android:textColor="@color/white"
             android:textSize="15dp"
             android:clickable="true" />
+
+
+        <!-- Record video button -->
+
     </LinearLayout>
 
 
