@@ -8,6 +8,9 @@ import com.fitstagram.AndroidMultiPartEntity.ProgressListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,9 +32,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,6 +51,7 @@ public class UploadActivity extends Activity {
 
     private ProgressBar progressBar;
     private String filePath = null;
+    private EditText inputEmail;
     private TextView txtPercentage;
     private ImageView imgPreview;
     private VideoView vidPreview;
@@ -170,13 +176,15 @@ public class UploadActivity extends Activity {
                 File sourceFile = new File(filePath);
 
                 // Adding file data to http body
-//                entity.addPart("image", new FileBody(sourceFile));
-
+                entity.addPart("image", new FileBody(sourceFile));
+                inputEmail = (EditText) findViewById(R.id.email);
+                String email = inputEmail.toString();
                 // Extra parameters if you want to pass to server
-    //            entity.addPart("website",
-    //                    new StringBody("www.androidhive.info"));
-     //           entity.addPart("email", new StringBody("abc@gmail.com"));
-
+                entity.addPart("email",new StringBody(email));
+                DateFormat format = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+                TimeZone la = TimeZone.getTimeZone("GMT");
+                format.setTimeZone(la);
+                entity.addPart("time",new StringBody(la.toString()));
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
 
