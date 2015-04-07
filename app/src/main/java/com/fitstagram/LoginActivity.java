@@ -79,40 +79,14 @@ public class LoginActivity extends Activity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-
-
-
-//        btnCapturePicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // capture picture
-//                captureImage();
-//            }
-//        });
-
-        /**
-         * Record video button click event
-         */
-//        btnRecordVideo.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // record video
-//                recordVideo();
-//            }
-//        });
-
-        // Checking camera availability
-        if (!isDeviceSupportCamera()) {
-            Toast.makeText(getApplicationContext(),
-                    "Sorry! Your device doesn't support camera",
-                    Toast.LENGTH_LONG).show();
-            // will close the app if the device does't have camera
-            finish();
-        }
-
-
-
+//        // Checking camera availability
+//        if (!isDeviceSupportCamera()) {
+//            Toast.makeText(getApplicationContext(),
+//                    "Sorry! Your device doesn't support camera",
+//                    Toast.LENGTH_LONG).show();
+//            // will close the app if the device does't have camera
+//            finish();
+//        }
 
         // Session manager
         session = new SessionManager(getApplicationContext());

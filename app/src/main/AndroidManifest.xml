@@ -11,12 +11,20 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+
+
+    <!--Icon made by http://www.freepik.com Freepik-->
+        <!--from http://www.flaticon.com Flaticon www.flaticon.com-->
+        <!--is licensed under http://creativecommons.org/licenses/by/3.0/ -->
+            <!--"Creative Commons BY 3.0 CC BY 3.0-->
     <application
         android:name="app.AppController"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/yoga13"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -58,14 +66,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fitstagram.MainActivity" />
         </activity>
-        <activity
-            android:name=".UploadConfirmActivity"
-            android:label="@string/title_activity_upload_confirm"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.fitstagram.MainActivity" />
-        </activity>
+        <activity android:name=".SingleItemView" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.fitstagram.MainActivity" />
+
+    </activity>
         <activity
             android:name=".ViewThreadActivity"
             android:label="@string/title_activity_view_thread"

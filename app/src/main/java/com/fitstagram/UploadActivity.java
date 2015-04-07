@@ -21,6 +21,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import android.support.v7.app.ActionBarActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,6 +33,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +47,7 @@ import android.widget.VideoView;
 
 import app.AppConfig;
 
-public class UploadActivity extends Activity {
+public class UploadActivity extends ActionBarActivity {
     // LogCat tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -61,13 +63,16 @@ public class UploadActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_upload);
         txtPercentage = (TextView) findViewById(R.id.txtPercentage);
         btnUpload = (Button) findViewById(R.id.btnUpload);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         imgPreview = (ImageView) findViewById(R.id.imgPreview);
         vidPreview = (VideoView) findViewById(R.id.videoPreview);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Changing action bar background color
 //        getActionBar().setBackgroundDrawable(
 //                new ColorDrawable(Color.parseColor(getResources().getString(
@@ -177,10 +182,7 @@ public class UploadActivity extends Activity {
 
                 // Adding file data to http body
                 entity.addPart("image", new FileBody(sourceFile));
-                inputEmail = (EditText) findViewById(R.id.email);
-                String email = inputEmail.toString();
                 // Extra parameters if you want to pass to server
-                entity.addPart("email",new StringBody(email));
                 DateFormat format = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
                 TimeZone la = TimeZone.getTimeZone("GMT");
                 format.setTimeZone(la);
@@ -214,7 +216,6 @@ public class UploadActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             Log.e(TAG, "Response from server: " + result);
-
             // showing the server response in an alert dialog
             showAlert(result);
 
@@ -222,7 +223,6 @@ public class UploadActivity extends Activity {
         }
 
     }
-
     /**
      * Method to show alert dialog
      * */

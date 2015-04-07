@@ -1,6 +1,8 @@
 package com.fitstagram;
 
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,11 +16,14 @@ import android.provider.MediaStore;
 import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.util.Log;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -30,6 +35,14 @@ import helper.SessionManager;
 
 import android.widget.Toast;
 
+import com.fitstagram.imageutils.FileCache;
+import com.fitstagram.imageutils.ImageLoader;
+import com.fitstagram.imageutils.MemoryCache;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -37,6 +50,10 @@ public class MainActivity extends ActionBarActivity {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
+    ProgressDialog mProgressDialog;
+    ArrayList<HashMap<String, String>> arraylist;
+    static String IMAGE = "image";
+    static String TIME = "time";
 
     private Uri fileUri; // file url to store image/video
 
@@ -44,47 +61,41 @@ public class MainActivity extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private TextView txtName;
     private TextView txtEmail;
+    MemoryCache memoryCache = new MemoryCache();
+    FileCache fileCache;
+    JSONObject jsonobject;
+    JSONArray jsonarray;
+    ListView listview;
+    ListViewAdapter adapter;
+
     private ImageButton btnThreadView;
     private SQLiteHandler db;
     private SessionManager session;
+    private ImageView imgView;
+    private ImageLoader imgLoader;
+    private String strURL = "http://killiand.netsoc.ie/progproj/php/AndroidFileUpload/uploads/IMG_20150406_174343.jpg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        txtName = (TextView) findViewById(R.id.name);
-//        txtEmail = (TextView) findViewById(R.id.email);
+        txtName = (TextView) findViewById(R.id.name);
+        txtEmail = (TextView) findViewById(R.id.email);
         btnThreadView = (ImageButton) findViewById(R.id.thread_view);
         btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /**
-         * Capture image button click event
-v
 
 
-
-
-         */
-//        btnCapturePicture.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//            public void onClick(View v) {
-//               // capture picture
-//                captureImage();
-//           }
-//       });
-
-        /**
-         * Record video button click event
-         */
-//        btnRecordVideo.setOnClickListener(new View.OnClickListener() {
+//        System.out.println(txtEmail.toString());
+//        JSONObject jo = JSONfunctions.getJSONfromURL(strURL);
+//        try {
+//            JSONArray array = jo.getJSONArray("images");
+//        //    for()
+//        }  catch (Exception e) {
+//            Log.e("log_tag", e.toString());
+//        }
 //
-//            @Override
-//            public void onClick(View v) {
-//                // record video
-//                recordVideo();
-//            }
-//        });
-
+//        imgView = (ImageView) findViewById(R.id.imageView1);
+//        imgLoader = new ImageLoader(this);
 
         btnThreadView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,23 +127,24 @@ v
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
 
-//        String name = user.get("name");
-//        String email = user.get("email");
+        String name = user.get("name");
+        String email = user.get("email");
 //
 //        // Displaying the user details on the screen
 //        txtName.setText(name);
 //        txtEmail.setText(email);
 
-        // Logout button click event
- //       btnLogout.setOnClickListener(new View.OnClickListener() {
 
-//            @Override
-//            public void onClick(View v) {
-//                logoutUser();
-//            }
-//        });
-//        showPopup(getWindow().getDecorView().findViewById(android.R.id.content));
 
+
+
+
+    }
+
+
+    public void btnLoadImageClick(View v){
+
+        imgLoader.DisplayImage(strURL, imgView);
     }
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared
@@ -173,25 +185,7 @@ v
 
         return true;
     }
-//    public void launchCamera(View view){
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        // Take a picture and pass results along to onActivityResult
-//        startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-//    }
 
-    //if you want to return the image taken
- //   @Override
- //   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // checks that there arent errors or anything
- //       if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            //get the photo
- //           Bundle extras = data.getExtras();
- //           Bitmap photo = (Bitmap) extras.get("data");
- //           Intent intent = new Intent(this, UploadConfirmActivity.class);
- //           intent.putExtra("BitmapImg",photo);
-  //          startActivity(intent);
- //       }
- //   }
 
 
     /**
@@ -378,7 +372,65 @@ v
         return mediaFile;
     }
 
+    // DownloadJSON AsyncTask
+    private class DownloadJSON extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(MainActivity.this);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Android JSON Parse Tutorial");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create an array
+            arraylist = new ArrayList<HashMap<String, String>>();
+            // Retrieve JSON Objects from the given URL address
+            jsonobject = JSONfunctions
+                    .getJSONfromURL("http://www.androidbegin.com/tutorial/jsonparsetutorial.txt");
+
+            try {
+                // Locate the array name in JSON
+                jsonarray = jsonobject.getJSONArray("worldpopulation");
+
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    jsonobject = jsonarray.getJSONObject(i);
+                    // Retrive JSON Objects
+ //                   map.put("rank", jsonobject.getString("rank"));
+ //                   map.put("country", jsonobject.getString("country"));
+                    map.put("time", jsonobject.getString("time"));
+                    map.put("image", jsonobject.getString("image"));
+                    // Set the JSON Objects into the array
+                    arraylist.add(map);
+                }
+            } catch (JSONException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void args) {
+            // Locate the listview in listview_main.xml
+            listview = (ListView) findViewById(R.id.listview);
+            // Pass the results into ListViewAdapter.java
+            adapter = new ListViewAdapter(MainActivity.this, arraylist);
+            // Set the adapter to the ListView
+            listview.setAdapter(adapter);
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+        }
+    }
 
 
 }

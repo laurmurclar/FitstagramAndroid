@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java/com.fitstagram', 'src/main/java/com.fitstagram/imageutils']
+        }
+    }
 }
 
 dependencies {
@@ -33,6 +38,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.0'
     compile files('src/libs/apache-httpcomponents-httpclient.jar')
     //     compile files('src/libs/httpcore-4.2.3.jar')
-  //  compile files('src/libs/httpmime-4.0.jar')
+    //  compile files('src/libs/httpmime-4.0.jar')
     compile files('src/libs/httpmime-4.2.6.jar')
 }

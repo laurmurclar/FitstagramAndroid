@@ -4,5 +4,8 @@
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:icon">@drawable/yoga13</item>
+    </style>
 
 </resources>
